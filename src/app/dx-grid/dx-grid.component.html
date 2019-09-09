@@ -1,0 +1,30 @@
+<dx-data-grid id="gridContainer" [dataSource]="dataSource" [remoteOperations]="false" [allowColumnReordering]="true"
+  [rowAlternationEnabled]="true" (onContentReady)="contentReady($event)"
+  [showBorders]="true">
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-group-panel [visible]="true"></dxo-group-panel>
+  <dxo-scrolling mode="virtual"></dxo-scrolling>
+  <dxo-editing
+      mode="row"
+      [allowAdding]="true"
+      [allowUpdating]="true"
+      [allowDeleting]="true">
+  </dxo-editing>
+  <dxi-column dataField="ID" ></dxi-column>
+    <dxi-column dataField="CompanyName"></dxi-column>
+    <dxi-column dataField="Address"></dxi-column>
+    <dxi-column dataField="City"></dxi-column>
+    <dxi-column dataField="State"></dxi-column>
+
+<dxo-paging [pageSize]="12"></dxo-paging>
+<dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[8, 12, 20]"
+></dxo-pager>
+</dx-data-grid>
+
+<hr/>
+<hr/>
+<hr/>
+dfs{{dataSource | json}}
