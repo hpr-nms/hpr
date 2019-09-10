@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DxGridComponent implements OnInit {
 
-
+  events: Array<string> = [];
 
 
   dataSource:any; // DataSource;
@@ -33,4 +33,13 @@ export class DxGridComponent implements OnInit {
   ngOnInit() {
     this.dataSource=   this.service.getCustomers();
   }
+  logEvent(eventName,event) {
+    console.log(eventName,event);
+
+    this.events.unshift(eventName);
+}
+
+clearEvents() {
+    this.events = [];
+}
 }

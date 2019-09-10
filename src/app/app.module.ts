@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     DxButtonModule,
+
     DxDataGridModule,
     DxDataGridModule,
     DxTemplateModule,

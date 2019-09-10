@@ -1,10 +1,21 @@
 <dx-data-grid id="gridContainer" [dataSource]="dataSource" [remoteOperations]="false" [allowColumnReordering]="true"
   [rowAlternationEnabled]="true" (onContentReady)="contentReady($event)"
-  [showBorders]="true">
+  [showBorders]="true"
+  (onEditingStart)="logEvent('EditingStart',$event)"
+  (onInitNewRow)="logEvent('InitNewRow',$event)"
+  (onRowInserting)="logEvent('RowInserting',$event)"
+  (onRowInserted)="logEvent('RowInserted',$event)"
+  (onRowUpdating)="logEvent('RowUpdating',$event)"
+  (onRowUpdated)="logEvent('RowUpdated',$event)"
+  (onRowRemoving)="logEvent('RowRemoving',$event)"
+  (onRowRemoved)="logEvent('RowRemoved',$event)">
+  <dxo-paging [pageSize]="5">
+  </dxo-paging>
+  <dxo-sorting mode="multiple" ></dxo-sorting>
   <dxo-filter-row [visible]="true"></dxo-filter-row>
   <dxo-header-filter [visible]="true"></dxo-header-filter>
   <dxo-group-panel [visible]="true"></dxo-group-panel>
-  <dxo-scrolling mode="virtual"></dxo-scrolling>
+  <!-- <dxo-scrolling mode="virtual"></dxo-scrolling> -->
   <dxo-editing
       mode="row"
       [allowAdding]="true"
@@ -27,4 +38,6 @@
 <hr/>
 <hr/>
 <hr/>
-dfs{{dataSource | json}}
+event:{{events | json}}
+
+
