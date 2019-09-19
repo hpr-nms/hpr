@@ -1,3 +1,6 @@
-<dx-button text="Click me" (onClick)="helloWorld()">
-</dx-button>
-<app-dx-grid></app-dx-grid>
+﻿<ng-container>
+  <router-outlet></router-outlet>
+  <button class="btn btn-primary" class="UpBtn" (click)="MoveUp()" id="myBtn">
+    <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+  </button>
+</ng-container>

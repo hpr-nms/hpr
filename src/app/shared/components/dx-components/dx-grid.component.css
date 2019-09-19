@@ -41,3 +41,8 @@
 ::ng-deep #events ul li:last-child {
   border-bottom: none;
 }
+
+gridContainer{
+  font-weight: 700;
+  font-size: 10px;
+}

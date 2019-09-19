@@ -1,32 +1,37 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { DashboardComponent } from './dashboard.component';
+import {
+  NgModule,
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA
+} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModuleModule } from './shared-module/shared-module.module';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DxButtonModule, DxBulletModule, DxTemplateModule, DxDataGridModule } from 'devextreme-angular';
-import { DxGridComponent } from './dx-grid/dx-grid.component';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { HttpClientModule } from '@angular/common/http';
+
+
+import { DxModuleModule } from './shared/components/dx-module/dx-module.module';
+import { DxService } from './shared/components/dx-components/dx.service';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DxGridComponent
-
-  ],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
-    AppRoutingModule,
-    BrowserModule,
-    HttpClientModule,
-    DxButtonModule,
+    SharedModuleModule,
+    FormsModule,
+    DxModuleModule,
 
-    DxDataGridModule,
-    DxDataGridModule,
-    DxTemplateModule,
-    DxBulletModule
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    DxService
+  ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() { }
+}

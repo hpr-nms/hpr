@@ -1,0 +1,67 @@
+<div id="wrapper">
+  <aside id="sidebar-wrapper">
+    <div class="sidebar-brand">
+      <img src="../../../../assets/images/logo2.png" class="ugImg" />
+    </div>
+    <ul class="sidebar-nav">
+      <li [class.active]="Tab =='tab_1-1'">
+        <a routerLinkActive="active" routerLink="/budget" (click)="changeTab('tab_1-1')">
+          <i class="fa fa-desktop"></i> بودجه
+        </a>
+      </li>
+      <li [class.active]="Tab =='tab_2-2'">
+        <a routerLinkActive="active" routerLink="/accounting" (click)="changeTab('tab_2-2')">
+          <i class="fa fa-users"></i>حسابداری
+        </a>
+      </li>
+      <li [class.active]="Tab =='tab_3-3'">
+        <a routerLinkActive="active" routerLink="/treasury" (click)="changeTab('tab_3-3')">
+          <i class="fa fa-drivers-license"></i> خزانه
+        </a>
+      </li>
+      <li [class.active]="Tab =='tab_4-4'">
+        <a routerLinkActive="active" routerLink="/finantial" (click)="changeTab('tab_4-4')">
+          <i class="fa fa-edit"></i> مالی
+        </a>
+      </li>
+      <li [class.active]="Tab =='tab_5-5'">
+        <a routerLinkActive="active" routerLink="/general" (click)="changeTab('tab_5-5')">
+          <i class="fa fa-tasks"></i> عمومی
+        </a>
+      </li>
+    </ul>
+  </aside>
+  <!-- دکمه نمایش پنل کناری -->
+  <div id="navbar-wrapper">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header row">
+          <a class="navbar-brand" id="sidebar-toggle" (click)="toggleMenu($event)">
+            <i class="fa fa-sign-out"></i>
+          </a>
+          <app-top-nav></app-top-nav>
+        </div>
+      </div>
+    </nav>
+  </div> <!-- دکمه نمایش پنل کناری -->
+
+  <!-- محتوای اصلی  -->
+  <div class="top_nav_container">
+    <div id="main_nav">
+      <!-- <app-top-nav></app-top-nav> -->
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col main">
+        <app-breadcrumb></app-breadcrumb>
+        <div class="page">
+
+          <!-- <app-dx-base></app-dx-base> -->
+          <!-- <app-temp></app-temp> -->
+          <router-outlet></router-outlet>
+          <div id="FooterMaster" class="FooterMaster"></div>
+        </div>
+      </div>
+    </div>
+  </div>

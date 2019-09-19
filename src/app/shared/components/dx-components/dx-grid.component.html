@@ -1,4 +1,4 @@
-<dx-data-grid id="gridContainer" [dataSource]="dataSource" [remoteOperations]="false" [allowColumnReordering]="true"
+<dx-data-grid #gridContainer id="gridContainer" [dataSource]="dataSource" [remoteOperations]="false" [allowColumnReordering]="true"
   [rowAlternationEnabled]="true" (onContentReady)="contentReady($event)"
   [showBorders]="true"
   (onEditingStart)="logEvent('EditingStart',$event)"

@@ -1,0 +1,45 @@
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col main">
+        <div class="page">
+
+
+
+
+          <div class="row">
+
+            <!-- <app-select class="col-md-4" name="sexB " #sexB [(ngModel)]="searchModel.select" lbl="descDetailCode"
+            val="detailCode" objId="inpSexB" formId="frmCustomer"
+            url="SystemManager/BaseCoding/BaseCoding/GetAllMCode?typecode=14" serverName="core"></app-select> -->
+
+            <app-input class="col-md-2"  tooltip="نمونه12:01" maxlength="8"
+              name="timeNobatBazdid" formId="frmNobatBazdid" #timeNobatBazdid objId="inptimeNobatBazdid"
+              [(ngModel)]="searchModel.input1" ></app-input>
+
+
+            <app-input class="col-md-2" name="phoneNumber" formId="frmNobatBazdid" objId="inpphoneNumber"
+              [(ngModel)]="searchModel.input2" maxlength="11"></app-input>
+
+          </div>
+
+          <div class="modal-footer row">
+
+            <button type="button" class="btn btn-default btn-responsive" (click)="searchFunc()">
+              جستجو
+            </button>
+
+          </div>
+
+
+
+
+          <app-dx-base></app-dx-base>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>

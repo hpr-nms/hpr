@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import DataSource from 'devextreme/data/data_source';
-import { DemoService } from './demo.service';
 import { HttpClient } from '@angular/common/http';
+import { DxService } from './dx.service';
 
 @Component({
   selector: 'app-dx-grid',
@@ -12,7 +12,6 @@ import { HttpClient } from '@angular/common/http';
 export class DxGridComponent implements OnInit {
 
   events: Array<string> = [];
-
 
   dataSource:any; // DataSource;
 
@@ -27,11 +26,10 @@ export class DxGridComponent implements OnInit {
     return { text: parseInt(pointsInfo.originalValue) + "%" };
   }
   constructor(
-    public service:DemoService,
-    httpClient: HttpClient
+    public dxService:DxService
     ) {}
   ngOnInit() {
-    this.dataSource=   this.service.getCustomers();
+    this.dataSource=   this.dxService.getCustomers();
   }
   logEvent(eventName,event) {
     console.log(eventName,event);
