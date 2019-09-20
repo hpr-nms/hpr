@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerService } from 'app/services/server.service';
 
 @Component({
   selector: 'app-temp',
@@ -11,7 +10,6 @@ export class TempComponent implements OnInit {
 searchModel=new AppModelSearch();
 
   constructor(
-    public serverServ:ServerService
   ) { }
 
   ngOnInit() {

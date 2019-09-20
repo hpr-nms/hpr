@@ -14,12 +14,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { DxModuleModule } from './shared/components/dx-module/dx-module.module';
 import { DxService } from './shared/components/dx-components/dx.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
   imports: [
+    BrowserModule,
     SharedModuleModule,
+    HttpClientModule,
     FormsModule,
     DxModuleModule,
 

@@ -1,127 +1,89 @@
 <button type="button" (click)="getTestData()">گرفتن دیتا</button>
 
+<!-- class="float-right" -->
+<dx-data-grid #gridContainer id="gridContainer" name='gridContainer' [dataSource]="dataSource "
+  [remoteOperations]="true" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true"
+  [showRowLines]="true" columnAutoWidth="false" [rtlEnabled]="true" [hoverStateEnabled]="true"
+  [allowColumnResizing]="true" [height]='gridHeight' [selectedRowKeys]="[]" (onRowClick)="rowClick($event)"
+  (onSelectionChanged)="selectionChanged($event)" [wordWrapEnabled]="dxOptions.colunmWordWrap"
+  (filterRowChange)="onFilterRowChange($event)">
+  <!-- [filterRow]="filterRow" -->
+  <!-- [customizeColumns]="customizeColumns(columns)"  فانکشنی برای کاستومایز کردن ستون ها-->
+  <!-- (onContentReady)="onContentReady($event)"  function that is executed when the widget's content is ready and each time the content is changed. -->
+  <!-- (onSelectionChanged)="selectionChanged($event)" -->
+  <!-- showScrollbar='always' -->
 
-<dx-data-grid #gridContainer id="gridContainer" name='gridContainer' class="float-right" [dataSource]="dataSource "  [remoteOperations]="true"
-  [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true" [showRowLines]="true"
-  columnAutoWidth="false" [rtlEnabled]="true" [hoverStateEnabled]="true" [allowColumnResizing]="true"
-   [height]='gridHeight'  [selectedRowKeys]="[]"
-   (onRowClick)="rowClick($event)"  (onSelectionChanged)="selectionChanged($event)"
->
-<!-- [width]='1200' -->
-<!-- [focusedRowEnabled]="true" [focusedRowIndex]="1" -->
   <dxo-load-panel [enabled]="true" text='لطفا منتظر بمانید'>
   </dxo-load-panel>
 
-  <!-- (onSelectionChanged)="selectionChanged($event)" -->
-  <!-- [wordWrapEnabled]="true" -->
-  <!-- showScrollbar='always' -->
-  <!-- (onRowInserted)="$event.component.navigateToRow($event.key)"  انتخاب سطر بعد از اینسرت-->
   <!-- *************************************  قسمت ستون ها  ********************************************* -->
   <!-- ساخت ستون ها -->
   <div *ngFor="let column of dxColumns">
-    <dxi-column allowColumnResizing='true'  [dataField]="column.dataField" [caption]="column.caption"
-      Width='200' [groupIndex]="column.dataType"
-      columnResizingMode="widget" columnMinWidth="50"
-      columnAutoWidth="true"
-      >
-      <!-- alignment="right" -->
-      <!--  اعتبارسنجی فیلد برای اضافه کردن سطر جدید  -->
-      <!-- <dxi-validation-rule type="stringLength" max="5"
-        message="The field Customer must be a string with a maximum length of 5.">
-      </dxi-validation-rule> -->
-      <!-- سرچ کردن ستونی که میخواهیم اضافه کنیم از لیست دیتا های خاص (selectlist) -->
-     <!--   <dxo-lookup>
-       [dataSource]="dataSource" // لیست ایتم ها برای سرچ
-             valueExpr="column.dataField"  // ستون   dataField
-            displayExpr="plates"  // ستون های سرچ
-          </dxo-lookup>
-        -->
-
+    <dxi-column allowColumnResizing='true' [dataField]="column.dataField" [caption]="column.caption"
+      [groupIndex]="column.dataType" columnResizingMode="widget" [allowSorting]="dxOptions.sorting.allowSorting">
+      <!-- alignment="right" [columnMinWidth]="200"  [width]="250" -->
     </dxi-column>
   </div>
+
   <!-- ********************************************************************************************* -->
   <!-- تمپلیت برای جدول داخلی در هر سطر از جدول اصلی -->
   <!-- <div *dxTemplate="let order of 'detail'"> -->
-    <!-- <app-dx-base></app-dx-base> -->
-    <!-- <dx-data-grid [dataSource]="dataSource" showBorders="true"> </dx-data-grid> -->
+  <!-- <app-dx-base></app-dx-base> -->
+  <!-- <dx-data-grid [dataSource]="dataSource" showBorders="true"> </dx-data-grid> -->
   <!-- </div> -->
-  <!-- ادیت سطر ها به صورت گروهی -->
-  <!-- <dxo-editing mode="row" [allowUpdating]="true" startEditAction="dblClick" selectTextOnEditStart="true"> -->
-  <!-- [selectTextOnEditStart]="true" // وقتی به حالت ادیت رفت نوشته داخل سللکت شده باشد یا نه
-  [startEditAction]="click | dblClick" -->
-  <!-- </dxo-editing> -->
+
+  <!-- *************************************  قسمت تنظیمات   ********************************************* -->
+
   <!-- دکمه انتخاب ستون ها  برای نمایش از مدال کوچک  -->
-  <dxo-column-chooser [enabled]="true" [allowSearch]="true" emptyPanelText=" انتخابگر ستون های مخفی" title="تایتل">
+  <dxo-column-chooser [allowSearch]="true" aria-placeholder="sdds" [enabled]="true" [allowSearch]="true"
+    emptyPanelText="برای مخفی کردن, ستون ها را به اینجا بکشید" title="ستون های مخفی">
   </dxo-column-chooser>
-  <dxo-column-fixing [enabled]="true">
-  </dxo-column-fixing>
+
 
   <!-- فیکس کردن ستون بد راست یا چپ (درکانتکس منو) -->
-  <dxo-column-fixing [enabled]="true" [texts]="fixtexts"></dxo-column-fixing>
-  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-column-fixing [enabled]="true" [texts]="fixtexts">
+  </dxo-column-fixing>
+
+  <dxo-sorting mode="dxOptions.sorting.sortingMode">
+  </dxo-sorting>
+
+  <dxo-header-filter [visible]="true">
+  </dxo-header-filter>
+  <!-- فیلد فیلتر بالای هر ستون -->
   <dxo-filter-row [visible]="true" applyFilter='auto' applyFilterText="applyFilterText">
     <!-- [applyFilter]= 'auto | onClick' [applyFilterText]=applyFilterText -->
   </dxo-filter-row>
-  <dxo-header-filter [visible]="true"></dxo-header-filter>
-  <dxo-group-panel [visible]="true" emptyPanelText='پنل خالی است'></dxo-group-panel>
-  <dxo-grouping [autoExpandAll]="true"> </dxo-grouping>
-  <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+  <dxo-group-panel [visible]="true" emptyPanelText='پنل خالی است'>
+  </dxo-group-panel>
+
+  <dxo-grouping [autoExpandAll]="true">
+  </dxo-grouping>
+
   <dxo-selection mode="single">
-  <!-- mode='multiple' | 'none' | 'single' -->
+    <!-- mode='multiple' | 'none' | 'single' -->
   </dxo-selection>
+
   <!--  اسکرول خوردن صفحه بجای صفحه بندی -->
-  <dxo-scrolling mode="virtual" rowRenderingMode="virtual" columnRenderingMode="virtual">
+  <dxo-scrolling mode="virtual" useNative="false" scrollByContent='true'>
+    <!-- useNative="false" scrollByContent='true' برای استفاده از اسکرول و دکمه وسط موس -->
   </dxo-scrolling>
-  <!-- قابل ویرایش  یا حذف بودن هر سطر -->
 
-  <!-- سایز هر صفحه جدول -->
-  <!-- <dxo-paging [pageSize]="10"></dxo-paging> -->
-  <!-- صفحه بندی  -->
-  <!-- <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" [showInfo]="true">
-  </dxo-pager> -->
-  <!-- پنل جستجو بالای جدول -->
-  <!-- <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true">
-  </dxo-search-panel> -->
-
-  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="جستجو ..."></dxo-search-panel>
-  <!--*************************************** قسمت فوتر **************************************** -->
-  <!-- <dxo-summary> -->
-  <!-- جمع کل ایتم های جدول -->
-  <!-- <dxi-total-item column="Freight" summaryType="sum">
-      <dxo-value-format type="decimal" [precision]="2"></dxo-value-format>
-    </dxi-total-item>
-    <dxi-group-item column="Freight" summaryType="sum">
-      <dxo-value-format type="decimal" [precision]="2"></dxo-value-format>
-    </dxi-group-item>
-    <dxi-group-item summaryType="count"> </dxi-group-item>
-  </dxo-summary> -->
+  <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="جستجو ...">
+  </dxo-search-panel>
   <!-- ********************************************************************************************* -->
+
+
 </dx-data-grid>
-<!-- {{dxGrid | json}} -->
 
-<!--
-dxi-column :
-[columnMinWidth]="200"
- editCellTemplate="singleDropDownBoxEditor | tagBoxEditor"
-dataField ="Product_Cost"
-caption="Cost" // نام فارسی هدر
-dataType="number"
-format="currency"
-[width]="250"
-///////////////////////
-cellTemplate="priceCellTemplate"
-  <div *dxTemplate="let cell of 'priceCellTemplate'" [class.inc]="cell.data.change > 0" [class.dec]="cell.data.change < 0">
-            <span>{{cell.text}}</span>
-        </div>
-        <div *dxTemplate="let cell of 'changeCellTemplate'" [class.inc]="cell.data.change > 0" [class.dec]="cell.data.change < 0">
-            <span class="current-value">{{cell.text}}</span>
-            <span class="arrow"></span>
-            <span class="diff">{{cell.data.percentChange.toFixed(2)}}%</span>
-        </div>
-////////////////////////
 
--->
 
+
+
+
+
+
+<!-- ********************************************************************************** -->
 <!--
   dx-data-grid:
 [masterDetail]= "{enabled: true, template: 'detail'}"
@@ -129,7 +91,7 @@ cellTemplate="priceCellTemplate"
   [remoteOperations]="true" // برای اسکرول از سمت سرور
   (onContentReady)="onContentReady($event)"
  // اضافه ویرایش و حذف سطر ها داخل جدول
-  (onEditingStart)="logEvent('EditingStart')"
+    (onEditingStart)="logEvent('EditingStart')"
     (onInitNewRow)="logEvent('InitNewRow')"
     (onRowInserting)="logEvent('RowInserting')"
     (onRowInserted)="logEvent('RowInserted')"
@@ -137,7 +99,7 @@ cellTemplate="priceCellTemplate"
     (onRowUpdated)="logEvent('RowUpdated')"
     (onRowRemoving)="logEvent('RowRemoving')"
     (onRowRemoved)="logEvent('RowRemoved')"
-     (onSelectionChanged)="selectionChanged($event)" // on select a row or deselect
+    (onSelectionChanged)="selectionChanged($event)" // on select a row or deselect
 
-       keyExpr="ID" // Specifies which data field provides keys for data items. Applies only if data is a simple array.
+    keyExpr="ID" // Specifies which data field provides keys for data items. Applies only if data is a simple array.
 -->

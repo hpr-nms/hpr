@@ -14,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'budget',
-    loadChildren: 'app/system/budget/budget.module#BudgetModule',
+    // loadChildren: 'app/system/budget/budget.module#BudgetModule',
+    loadChildren: () => import('src/app/system/budget/budget.module').then(m => m.BudgetModule),
     data: {
       breadcrumb: 'بودجه'
     }
@@ -45,7 +46,8 @@ const routes: Routes = [
   // },
   {
     path: 'general',
-    loadChildren: 'app/system/general/general.module#GeneralModule',
+    // loadChildren: 'app/system/general/general.module#GeneralModule',
+    loadChildren: () => import('src/app/system/general/general.module').then(m => m.GeneralModule),
     data: {
       breadcrumb: 'عمومی'
     }

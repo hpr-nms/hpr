@@ -1,9 +1,9 @@
 
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { IdxOptions } from './shared/components/dx-components/dx-base/IdxOptions';
 
 
-declare var $: any;
 
 declare var _: any;
 // declare var Storages: any;
@@ -32,53 +32,15 @@ export class AppComponent implements OnInit {
 
   isOpenKey = false;
 
+  ////////////////
+  bankModel = new AppBank();
+
+  Options: IdxOptions;
+  dataSource;
+
   constructor(
     private router: Router
-  ) {
-    const config = {
-      layout: this.layout,
-      background: this.background,
-      navbar: this.navbar,
-      sidebar: this.sidebar,
-      topNavigation: this.topNavigation,
-      collapsed: this.collapsed,
-      logo: this.logo
-    };
-    this.defultContextmenu = true;
-    // const storage = Storages.localStorage;
-    const collapsed = config.collapsed;
-
-    // reset localStorage on page load for demo purposes only. this can be removed in production
-    // storage.removeAll();
-
-    // if (storage.isEmpty('config') || !storage.get('config')) {
-    //   //  storage.removeAll();
-    //   storage.set('config', config);
-    // }
-    // config = storage.get('config');
-
-    // set attributes before page is loaded. this can be removed in production
-    $('body').attr('data-background', config.background);
-    $('body').attr('data-navbar', config.navbar);
-    $('body').attr('data-sidebar', config.sidebar);
-    $('body').attr('data-top-navigation', config.topNavigation);
-    $('body').attr('data-collapsed', config.collapsed);
-    $('body').attr('data-logo', config.logo);
-    if ($('html').hasClass('loading')) {
-      const loaderTime = 2000;
-      $('#fakeloader').fakeLoader({
-        timeToHide: loaderTime,
-        zIndex: '99999',
-        spinner: 'spinner5',
-        bgColor: '#1f2346'
-      });
-      setTimeout(function() {
-        $('html').removeClass('loading');
-      }, loaderTime);
-    }
-
-
-  }
+  ) { this.defultContextmenu = true; }
 
   MoveUp() {
     window.scroll({
@@ -106,7 +68,54 @@ export class AppComponent implements OnInit {
     body.setAttribute('oncontextmenu', 'return ' + this.defultContextmenu);
 
 
+
+    this.Options = new IdxOptions();
+    this.getFormList();
+  }
+  private getFormList() {
+    this.dataSource = [
+      // tslint:disable-next-line: max-line-length
+      { id: 1, name: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا ' },
+      // tslint:disable-next-line: max-line-length
+      { id: 2, name: 'لورم ایپسوم متن ساختگی با تولید سادگیرها و متوبرای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا ' },
+      // tslint:disable-next-line: max-line-length
+      { id: 3, name: 'لورم ایپسوم متن ساخی متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا ' },
+      { id: 4, name: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ا می طلبد تا ' }
+    ]
+    this.Options.Columns = [
+      { caption: 'ایدی', dataField: 'id', dataType: "string" },
+      { caption: 'نام بانک', dataField: 'name', dataType: "string" }
+    ];
+    this.Options.sorting = { allowSorting: true, sortingMode: 'multiple' }
+
   }
 
 
+
+
+  getserver() {
+    this.getFormList();
+  }
+
+  submitForm(MapParvaneForm, $event) {
+
+  }
+  clearform(form) {
+
+  }
+
+}
+
+
+
+
+
+
+
+
+export class AppBank {
+  constructor(
+    public id: number = 0,
+    public name: string = null
+  ) { }
 }

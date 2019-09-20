@@ -1,6 +1,5 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { RouteGuard } from 'app/shared/oidc/route.guard';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { GeneralComponent } from './general.component';
 import { BankComponent } from './bank/bank.component';
 
@@ -14,8 +13,7 @@ const routes: Routes = [
         component: BankComponent,
         data: {
           breadcrumb: 'بانک'
-        },
-        canActivate: [RouteGuard]
+        }
       }
     ]
   }

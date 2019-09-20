@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ServerService } from 'app/services/server.service';
 import { Subscription } from 'rxjs';
-import { IdxOptions } from 'app/shared/components/dx-components/dx-base/IdxOptions';
-import { AppPermissionConfigService } from 'app/services/app-permission-config.service';
+import { IdxOptions } from 'src/app/shared/components/dx-components/dx-base/IdxOptions';
 
 @Component({
   selector: 'app-bank',
@@ -17,8 +15,6 @@ export class BankComponent implements OnInit, OnDestroy {
   dataSource;
   subscription: Subscription[] = [];
   constructor(
-    public serverServ: ServerService,
-    public AppConfig:AppPermissionConfigService
   ) { }
 
   ngOnInit() {
@@ -26,15 +22,17 @@ export class BankComponent implements OnInit, OnDestroy {
     this.getFormList();
   }
   private getFormList() {
-    this.subscription.push(this.serverServ.getFormAuto('General/Bank/GetAll', false).subscribe(data => {
-      this.Options.Columns = [
-        { caption: 'ایدی', dataField: 'id', dataType: "string" },
-        { caption: 'نام بانک', dataField: 'name', dataType: "string" }
-      ];
-      this.dataSource = data.data;
-      console.log('received data', data);
+    this.dataSource = [
+      { id: 1, name: 'df' },
+      { id: 2, name: 'dgbvf' },
+      { id: 3, name: 'dncvnf' },
+      { id: 4, name: 'dvcf' }
+    ]
+    this.Options.Columns = [
+      { caption: 'ایدی', dataField: 'id', dataType: "string" },
+      { caption: 'نام بانک', dataField: 'name', dataType: "string" }
+    ];
 
-    }));
   }
 
   ngOnDestroy(): void {

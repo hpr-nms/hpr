@@ -5,10 +5,14 @@ import { DxBaseComponent } from "../dx-components/dx-base/dx-base.component";
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [CommonModule,FormsModule, DxDataGridModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    DxDataGridModule
+  ],
   declarations: [DxBaseComponent],
   exports: [DxBaseComponent],
   schemas: [],
   providers: []
 })
-export class DxModuleModule {}
+export class DxModuleModule { }

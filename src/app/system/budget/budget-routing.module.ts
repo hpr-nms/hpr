@@ -2,9 +2,8 @@
 
 
 
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { RouteGuard } from 'app/shared/oidc/route.guard';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BudgetComponent } from './budget.component';
 import { TempComponent } from './temp/temp.component';
 
@@ -12,7 +11,6 @@ const routes: Routes = [
   {
     path: '',
     component: BudgetComponent,
-    canActivate: [RouteGuard],
 
     children: [
       {
@@ -21,7 +19,6 @@ const routes: Routes = [
         data: {
           breadcrumb: 'تست'
         },
-        canActivate: [RouteGuard]
       }
     ]
   }

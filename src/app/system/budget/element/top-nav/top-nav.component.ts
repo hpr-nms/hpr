@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AppPermissionConfigService } from '../../../../services/app-permission-config.service';
-import { AlertService } from 'app/services/alert.service';
 declare var $: any;
 @Component({
   selector: 'app-top-nav',
@@ -8,15 +6,12 @@ declare var $: any;
   styleUrls: [`top-nav.component.css`]
 })
 export class TopNavComponent implements OnInit {
-  @ViewChild('menuContainer') menuContainer;
+  @ViewChild('menuContainer',{static:false}) menuContainer;
   tabSelected = 0;
   tabSubSelected = 0;
 
   toggleMenu = false;
-  constructor(
-    public AppConfig: AppPermissionConfigService,
-    private alert: AlertService
-  ) {}
+  constructor(  ) {}
 
   ngOnInit() {}
 
@@ -29,7 +24,6 @@ export class TopNavComponent implements OnInit {
   clearLocal() {
     localStorage.clear();
 
-    this.alert.success('حافظه مرورگر پاک شد.');
   }
 
   // منوی موبایل

@@ -1,5 +1,17 @@
 ﻿<ng-container>
   <router-outlet></router-outlet>
+
+
+<div class="row">
+
+
+  <app-dx-base [dataSource]="dataSource" [dxOptions]="Options">
+  </app-dx-base>
+
+</div>
+
+
+
   <button class="btn btn-primary" class="UpBtn" (click)="MoveUp()" id="myBtn">
     <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
   </button>

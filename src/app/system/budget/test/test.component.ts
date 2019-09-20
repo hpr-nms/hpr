@@ -1,8 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, } from '@angular/core';
 
-import DataSource from 'devextreme/data/data_source';
-import CustomStore from 'devextreme/data/custom_store';
-
 
 @Component({
   selector: 'app-test',

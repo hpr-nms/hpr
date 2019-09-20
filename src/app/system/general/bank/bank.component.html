@@ -6,17 +6,9 @@
 
 <div class="nmsFormBox">
   <form #BankForm="ngForm" novalidate>
-    <app-form-box formId="frmMapParvane">
       <div class="modal-body">
         <div class="row">
 
-
-          <app-input class="col-md-3" appNmsValidators="number" name="mapEtebarDays" formId="frmCustomer"
-            objId="inpName" [(ngModel)]="bankModel.id" required></app-input>
-
-
-          <app-input class="col-md-3" appNmsValidators="number" name="mapEtebarDays" formId="frmMyWay"
-            objId="tblThidway" [(ngModel)]="bankModel.name" required></app-input>
 
         </div>
       </div>
@@ -27,6 +19,5 @@
           (click)="clearform(BankForm)">{{AppConfig.getNameObj('frmShare','shareBtnCancel')}}</button>
       </div>
 
-    </app-form-box>
   </form>
 </div>
