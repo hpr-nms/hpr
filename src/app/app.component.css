@@ -1,0 +1,15 @@
+
+  .app-input{
+    margin:2rem;
+  }
+  .example-full-width{
+    text-align: right;
+  }
+
+mat-form-field{
+  text-align: right;
+  direction: rtl;
+}
+body{
+  direction: rtl;
+}
