@@ -65,8 +65,11 @@ export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
 
   }
     hh(event){
-         console.log('loooooggg',event)
+         console.log('hh',event)
      }
+     hhh(event ,column){
+      console.log('loooooggg',event ,'and col:',column)
+  }
 
   ngOnInit() {
     // this.dataGrid.filterBuilder.filterOperationDescriptions=this.operationDescriptions;
