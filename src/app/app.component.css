@@ -1,15 +1,22 @@
-
-  .app-input{
-    margin:2rem;
-  }
-  .example-full-width{
-    text-align: right;
-  }
-
-mat-form-field{
-  text-align: right;
-  direction: rtl;
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
 }
-body{
-  direction: rtl;
+
+
+.example-container > * {
+  /* width: 100%; */
+}
+
+.example-container form {
+  margin-bottom: 20px;
+}
+
+.example-container form > * {
+  margin: 5px 0;
+}
+
+.example-container .mat-radio-button {
+  margin: 0 12px;
 }

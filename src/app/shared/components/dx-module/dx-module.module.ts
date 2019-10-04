@@ -1,6 +1,6 @@
 ﻿import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { FormsModule } from '@angular/forms';
-import { DxDataGridModule } from "devextreme-angular";
+import { DxDataGridModule, DxTreeListModule } from "devextreme-angular";
 import { DxBaseComponent } from "../dx-components/dx-base/dx-base.component";
 import { CommonModule } from '@angular/common';
 
@@ -8,10 +8,15 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
-    DxDataGridModule
+    DxDataGridModule,
+    DxTreeListModule
   ],
-  declarations: [DxBaseComponent],
-  exports: [DxBaseComponent],
+  exports: [
+    DxBaseComponent,
+  ],
+  declarations: [
+    DxBaseComponent,
+  ],
   schemas: [],
   providers: []
 })

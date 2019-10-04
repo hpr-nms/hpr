@@ -1,7 +1,7 @@
 
-
 export class IdxOptions {
   Columns: IColumn[];
+  height?: number | string
   sorting?: {
     allowSorting?: boolean;
     sortingMode: 'multiple' | 'single';
@@ -54,17 +54,21 @@ export class IColumn {
   caption: string = null
   columnAutoWidth?: boolean;
   width?: number;
+  sortOrder?: "asc" | "desc";
+  visible?: boolean
   constructor(
     dataField,
     dataType,
     caption,
     width = null,
-    columnAutoWidth = true
+    columnAutoWidth = true,
+    visible = true
   ) {
     this.dataField = dataField;
     this.dataType = dataType;
     this.caption = caption;
     this.columnAutoWidth = columnAutoWidth;
+    this.visible = visible;
   }
 }
 
@@ -102,6 +106,24 @@ export class IfilterRow {
   showAllText?: string = "نمایش همه";
   showOperationChooser?: boolean = true;
   visible?: boolean = true;
+
+
+  // constructor(
+  //   // operationDescriptions: {
+  //     between: string= " بین",
+  //     contains: string= " در محدوده",
+  //     endsWith: string= " پایان با",
+  //     equal: string= " مساوی",
+  //     greaterThan: string= "بزرگتر از ",
+  //     greaterThanOrEqual: string= " بزرگتر یا مساوی",
+  //     lessThan: string= " کوچکتر",
+  //     lessThanOrEqual:string= "کوچکتر یا مساوی ",
+  //     notContains: string= "نباشد در ",
+  //     notEqual: string= " نامساوی",
+  //     startsWith: string= " شروع با",
+  //   // }
+  // ) {
+  // }
 }
 
 // تنظیمات فیلتر برای هدر
@@ -118,6 +140,3 @@ export class IheaderFilter {
   width?: number;
 }
 
-
-
-//  selectionFilterChange: EventEmitter<any>;

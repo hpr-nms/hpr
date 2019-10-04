@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,61 +7,73 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  @Input() isshowdiv = false;
 
-  openSideBar = false;
   Tab = "tab_1-1";
   constructor(
     public router: Router
   ) { }
 
   ngOnInit() {
-    this.Tab = "tab_1-1";
-    console.log(this.Tab);
+    // this.Tab = "tab_1-1";
+    // console.log(this.Tab);
   }
 
-  openNav() {
-    if (!this.openSideBar) {
-      // document.getElementById("mySidebar").classList.add("open");
-      // document.getElementById("main").classList.add("open");
-      document.getElementById("sidebar-toggle").classList.remove("exitUmLeft");
-      document.getElementById("sidebar-toggle").classList.add("exitUmLeft");
+  HideDiv() {
+    console.log(document.getElementById("style-selector"));
 
-      console.log(document.getElementById("sidebar-toggle").classList, this.openSideBar);
-
+    if (document.getElementById("style-selector").classList.contains("open")) {
+      document.getElementById("style-selector").classList.remove("open");
+      document.getElementById("style-selector").classList.add("close");
+      this.isshowdiv = false;
     } else {
-      // document.getElementById("mySidebar").classList.remove("open");
-      // document.getElementById("main").classList.remove("open");
-      document.getElementById("sidebar-toggle").classList.remove("exitUmLeft");
-      document.getElementById("sidebar-toggle").classList.add("exitUmleft");
-
-      console.log(document.getElementById("sidebar-toggle").classList, this.openSideBar);
-
+      document.getElementById("style-selector").classList.add("open");
+      document.getElementById("style-selector").classList.remove("close");
+      this.isshowdiv = true;
     }
-    this.openSideBar = !this.openSideBar;
+
   }
 
-  changeTab(tabIndex) {
-    this.Tab = tabIndex;
-  }
+  // openNav() {
+  //   if (!this.openSideBar) {
+  //     // document.getElementById("mySidebar").classList.add("open");
+  //     // document.getElementById("main").classList.add("open");
+  //     document.getElementById("sidebar-toggle").classList.remove("exitUmLeft");
+  //     document.getElementById("sidebar-toggle").classList.add("exitUmLeft");
 
-  callComponent(component) {
-    if (component === "assignActionToOperation") {
-      this.Tab = "tab_6-6-1";
-    } else if (component === "assignOperationToRole") {
-      this.Tab = "tab_6-6-2";
-    } else if (component === "assignRoleToUser") {
-      this.Tab = "tab_6-6-3";
-    }
-  }
+  //     console.log(document.getElementById("sidebar-toggle").classList, this.openSideBar);
 
-  toggleMenu(e) {
-    this.openNav();
-    e.preventDefault();
-    document.getElementById("wrapper").classList.toggle("toggled");
-  }
+  //   } else {
+  //     // document.getElementById("mySidebar").classList.remove("open");
+  //     // document.getElementById("main").classList.remove("open");
+  //     document.getElementById("sidebar-toggle").classList.remove("exitUmLeft");
+  //     document.getElementById("sidebar-toggle").classList.add("exitUmleft");
 
+  //     console.log(document.getElementById("sidebar-toggle").classList, this.openSideBar);
 
+  //   }
+  //   this.openSideBar = !this.openSideBar;
+  // }
 
+  // changeTab(tabIndex) {
+  //   this.Tab = tabIndex;
+  // }
+
+  // callComponent(component) {
+  //   if (component === "assignActionToOperation") {
+  //     this.Tab = "tab_6-6-1";
+  //   } else if (component === "assignOperationToRole") {
+  //     this.Tab = "tab_6-6-2";
+  //   } else if (component === "assignRoleToUser") {
+  //     this.Tab = "tab_6-6-3";
+  //   }
+  // }
+
+  // toggleMenu(e) {
+  //   this.openNav();
+  //   e.preventDefault();
+  //   document.getElementById("wrapper").classList.toggle("toggled");
+  // }
 
 
 }

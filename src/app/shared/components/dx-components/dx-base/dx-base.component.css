@@ -1,14 +1,14 @@
-/* ::ng-deep #events {
+::ng-deep #events {
   background-color: rgba(191, 191, 191, 0.15);
   padding: 20px;
   margin-top: 20px;
 }
 
-::ng-deep #events > div {
+::ng-deep #events>div {
   padding-bottom: 5px;
 }
 
-::ng-deep #events > div:after {
+::ng-deep #events>div:after {
   content: "";
   display: table;
   clear: both;
@@ -32,12 +32,6 @@
   overflow: auto;
   margin: 0;
 }
-
-::ng-deep #events ul li {
-  padding: 7px 0;
-  border-bottom: 1px solid #dddddd;
+::ng-deep .dx-datagrid{
+  font-family: IRANSans-web !important;
 }
-
-::ng-deep #events ul li:last-child {
-  border-bottom: none;
-} */

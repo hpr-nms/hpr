@@ -17,25 +17,21 @@ import { DxService } from './shared/components/dx-components/dx.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
   imports: [
     BrowserModule,
-    SharedModuleModule,
-    HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
-    DxModuleModule,
-    MatInputModule,
-    MatButtonModule,MatDatepickerModule,
-    AppRoutingModule,MatNativeDateModule,MatCheckboxModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    // MaterialModule,
-    BrowserAnimationsModule
+    SharedModuleModule,
+    DxModuleModule,
+    AppRoutingModule,
   ],
   providers: [
+
     DxService
   ],
   bootstrap: [AppComponent],
