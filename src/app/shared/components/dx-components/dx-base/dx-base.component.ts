@@ -4,51 +4,36 @@ import { DxTemplateDirective, DxDataGridComponent } from "devextreme-angular";
 import { DxiDataGridColumn } from 'devextreme-angular/ui/nested/base/data-grid-column-dxi';
 import { IdxOptions } from './IdxOptions';
 import { Subscription } from 'rxjs';
+import { DxDefault, IfilterRow } from './dx-defaults';
 // import * as AspNetData from "devextreme-aspnet-data-nojquery";
 
 @Component({
   selector: "app-dx-base",
   templateUrl: "./dx-base.component.html",
   styleUrls: ["./dx-base.component.css"],
-  providers: [ DxTemplateDirective]
+  providers: [DxTemplateDirective]
 })
-export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
-  filterValue=null;
-  selectedFilterOperation='';
+export class DxBaseComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input('dataSource') dataSource ;  // دریافت دیتا سورس
+
+  @Input('dataSource') dataSource;  // دریافت دیتا سورس
   @Input('dxOptions') dxOptions: IdxOptions;  // دریافت تمامی تنظیمات گرید از کامپوننت پدر
+  @Input('dxOptions') dxDefault: DxDefault;  // دریافت تمامی تنظیمات گرید از کامپوننت پدر
   @Input('gridName') gridName; // نام برای ذخیره تنظیمات گرید در اینده
   @Input('deselectGrid') deselectGrid; // نام برای ذخیره تنظیمات گرید در اینده
-  @Input() public classOffset = '';'col-md-1';
+  @Input() public classOffset = ''; //'col-md-1';
   @Input() public dxClass = 'col-md-12';
-  @ViewChild(DxDataGridComponent,{static:false}) dataGrid: DxDataGridComponent;
-  sortOrder;
-  sortingMode;
-  // @ViewChild(name) gridContainer: DxDataGridComponent;
-
+  @Input() public disableSelectRow = false;
   @Output() onRowClick = new EventEmitter<any>();
-  @Output() onRowRemove = new EventEmitter<any>();
-  operationDescriptions= {
-    between:  "بین",
-    contains:  " در محدوده",
-    endsWith:  " پایان با",
-    equal:  " مساوی",
-    greaterThan:  "بزرگتر از ",
-    greaterThanOrEqual:  " بزرگتر یا مساوی",
-    lessThan:  " کوچکتر",
-    lessThanOrEqual:  "کوچکتر یا مساوی ",
-    notContains:  "نباشد در ",
-    notEqual:  " نامساوی",
-    startsWith:  " شروع با"
-  };
-  isRowSelected = false;
-  selectedRow: any;
+  @ViewChild(DxDataGridComponent,{static:false}) dataGrid: DxDataGridComponent;
+
+  operationDescriptions = new DxDefault().filterRow.operationDescriptions;
+
   // #region "test data"
-  gridHeight: string | number = "90vh";
-  searchtxt;
+  gridHeight: string | number = "60vh";
+  // searchtxt;
   dxColumns;
-  // filterRow;
+  filterRow;
   selectedItemKeys;
   fixtexts = {
     fix: "سنجاق", leftPosition: 'چپ', rightPosition: 'راست', unfix: 'بدون سنجاق'
@@ -59,22 +44,19 @@ export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
   // #endregion "test data"
   subscription: Subscription[] = [];
 
+  wordWrapEnabled=false;
+  remoteOperations=true;
+  cellHintEnabled=true;
 
 
   constructor() {
 
   }
-    hh(event){
-         console.log('hh',event)
-     }
-     hhh(event ,column){
-      console.log('loooooggg',event ,'and col:',column)
-  }
 
   ngOnInit() {
+    this.filterRow=new IfilterRow();
     // this.dataGrid.filterBuilder.filterOperationDescriptions=this.operationDescriptions;
-    this.sortingMode= "multiple";
-      if (this.dxOptions) {
+    if (this.dxOptions) {
       // this.dataGrid.filterRow = this.dxOptions.filterRow;
       // this.dataGrid.filterRow.operationDescriptions = this.operationDescriptions;
       this.dxColumns = this.dxOptions.Columns;
@@ -83,21 +65,24 @@ export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
       }
     }
   }
+
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     if (this.dataGrid) {
       this.dxColumns = this.dxOptions.Columns;
 
       if (changes['deselectGrid']) {
-       if (this.dataGrid.instance) { this.dataGrid.instance.deselectAll();}
+        if (this.dataGrid.instance) { this.dataGrid.instance.deselectAll(); }
       }
       if (changes['dataSource']) {
         if (changes['dataSource'].currentValue) {
           this.dataGrid.dataSourceChange = changes['dataSource'].currentValue;
         }
       }
+      if (changes['disableSelectRow']) {
+        this.disableSelectRow = this.disableSelectRow;
+      }
 
     }
-
   }
 
   ngOnDestroy(): void {
@@ -107,10 +92,8 @@ export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
       });
     }
   }
-  exportToExcel(){
-    this.dataGrid.instance.exportToExcel(false);
- }
-
+  onFilterValueChange(event){console.log('onFilterValueChange',event);
+  }
   onHeaderFilrerChng(event) {
     console.log("onHeaderFilrerChng", event);
 
@@ -118,25 +101,18 @@ export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
 
   rowClick(row) {
     this.onRowClick.emit(row.key);
-    this.selectedRow = row.key;
-    this.isRowSelected = true;
-  }
-  deleteRow() {
-    console.log('onclick delete row',this.selectedRow);
-
-    this.onRowRemove.emit(this.selectedRow);
   }
   onFilterRowChange(event) {
-    console.log('onFilterRowChange',event);
+    console.log(event);
 
   }
-  selectStatus() {
-    if (this.searchtxt == "All") {
-      this.dataGrid.instance.clearFilter();
-    } else {
-      this.dataGrid.instance.filter(["Task_Status", "=", this.searchtxt]);
-    }
-  }
+  // selectStatus() {
+  //   if (this.searchtxt == "All") {
+  //     this.dataGrid.instance.clearFilter();
+  //   } else {
+  //     this.dataGrid.instance.filter(["Task_Status", "=", this.searchtxt]);
+  //   }
+  // }
 
 
   getDispalyValue(rowData) {
@@ -160,7 +136,7 @@ export class DxBaseComponent implements OnInit, OnChanges , OnDestroy{
     // this.dataGrid.instance.refresh();
   }
 
-  columnsChange(event){
+  columnsChange(event) {
     // console.log('columnsChange',event);
 
   }

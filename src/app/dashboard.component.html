@@ -1,30 +1,18 @@
 <ng-container>
-  <div id="style-selector">
-    <div class="style-toggle" (click)="HideDiv()">
-      <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        x="0px" y="0px" viewBox="0 0 14.2 14.9" style="enable-background:new 0 0 14.2 14.9;" xml:space="preserve">
-        <path class="st0" d="M13.4,8.8c-1.1-0.7-1-2,0-2.7c0.3-0.2,0.7-0.4,0.7-0.8c-0.3-1-0.8-1.9-1.5-2.7C12,2,11.5,2.9,11,2.8
-            c-0.9-0.1-2-0.2-2-1.5c0-1.6-1.2-1.1-2-1.1c-0.8,0-1.9-0.5-2,1.1c0,1.1-1.3,1.9-2.3,1.3c-1.4-0.8-1.6,0.5-2,1.2
-            c-0.4,0.6-1.4,1.4,0,2.3c1.1,0.7,1.1,2.1,0,2.7c-1.4,0.8-0.3,1.7,0,2.3c0.4,0.6,0.6,1.9,2,1.2c1-0.6,2.3,0.2,2.4,1.3
-            c0,1.6,1.2,1.1,2,1.1c0.8,0,1.9,0.5,2-1.1c0-1.1,1.3-1.9,2.3-1.3c1.4,0.8,1.6-0.5,2-1.2C13.8,10.5,14.8,9.7,13.4,8.8z M7,9.6
-            C5.8,9.6,4.8,8.5,4.9,7.4c0-1.1,1.1-2.1,2.3-2.1c1.1,0,2.2,1,2.2,2.2C9.3,8.6,8.2,9.7,7,9.6z"></path>
-      </svg> -->
-      <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAE1ElEQVR4nO3aXahUVRQH8N/1XjMLKg0rgkRIqcjSPsg+hMSCPqyUXupBepCeIuuhgoQELaio1AqkHiryEngNQivLIJUgkijqxafQLCj6MDP7MJXsTg/rHM65587MnTsz3pm5zR8Oc85e65xZ/7XXXnuvfQ5ddPG/Rk+rDWgAV2I+JuNz7ECppRaNEXrxkiCbP3bg9BbaNSboxQZB+AiexxP4OWn71Dh2Qi9eF0T/woKc7DzsTWRfYOoY23bCke/5IvkU484JS7EVK9EviP0hEl8lTMfXxsFweNjwJFep54vo+EhYIYw/jtU4mFxvx8Qan9GxkZCSL4kogMtlTnjLOHZCnnwJ9+dk494JRfIfihVeHs1wwk5MaIK9TcUDsjG/Ca8aSv4kTErOG3HCT8l9dzRucvMwAX9iEPeUkU8XGX2vrG6p1wmrknueKRrQSgyKub0Hcwuyc/ARzscPskLnS9yI33AnBtTmhDOS32MNWXwCMCAb+2tz7YtVT16jiYT5onYo4ZrGTW4enhVGHcNRQ53Qg+txSk5/Gh7HjOS6FifMF8OsJKrItsGTMvJLcLOsl9aV0T8LuxP56lz7XBxI2rfKEiZcK4ZYCRvR11QGDaBIPkU1J3yQtO8WkZBHOSe0LfnnZOTLTUmLDB8ORFG0TURCOeSHw3YZ+X5RTbYF8j2/uIreSMOBSIwfi0VOGvb5SGjrnr+9Bv1KkQCnitmhhD2GJr98JKxszOTmYY3RkU9RyQkLkrZ9YrFUxCpZPmg56iWfopwTekT+ODunNxnLRRV5PNFfWp/JzcNTqie8q0Thc/UIzxkpJ0xOnpMvqB6rz+TmYW1iyFHcVkY+D4cSnQdreF61nPCaoeRX1Gdy8zAS+StkiepNtWfqSk7YpI3IjxT202U9X880VRwOd+MfbRL262Q9v6iCzkyxSOlX3xx9MX4xfNO0pT3fY2Typ4nNjVS/HsyWvQX6BN8LZy6v83lNQY94RZWSv7WMzjxRv+9s4H/y5N/HyUl7S/c0aiWfjvmXy8j7xC7NI1X+pxL5lmK05DcaXpT0yTZE9lX4nyL5SRX0xhQ9eEH1Fd5IU10v3kjkh4SzirgQPyY627RRz48F+Yt0yXfJd8k3wfaGMVbkL5Wt8NqK/Iu65B1TX1U3WvJttchJyddb0tZCfo42JE9W0h7BTWXk+RXegOHk8yu8Wsi/KyuUWo6Z+FcYNih2XQfEWn1hcjST/DvaiDyxkVgS1dvfhtfd6TEuycNDwrg1gtAcLMN68U1uCfvVRz7/4qItycPTwsBHy8h6cVgMjamF9nzCK7fLW0x4bVHVlcMrwsh7K8h3JfL7MMXoe/5tbdrzKbYIQ5dUkKd7AOmx3zgiT+y1lXBdBfm5wgm7DE2SN5TRvUxGfosOIA9fCYMvqEG3T5YYFxZkHUmemP5KYnzXgvWJfn5PLx/272njhFfERJHhS2KNXguWydYFRM//mrRt1kE9D7MMTW6X1HDPnER/j+rf63QEbjE8w88e4Z6JomYYlBVHm9X+AWNLUVzNzSpcTxMvMxbiu+R6Ks5MjvT8sKjkpgjyd4n3dR2HtASu9+jXIT2fohgBM6ro/i6SW3oczJ0fwGdiSuwoFB2wQbxr+0YktT3iQ+VvdWhId9FFF1XxH+lYOWtGoLesAAAAAElFTkSuQmCC"> -->
-
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAA1CAMAAAA05Eg7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAxRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MkNBODIyMUJFNkRGMTFFOUE2RUZGRTE5OEU0NTUxRjQiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MkNBODIyMUFFNkRGMTFFOUE2RUZGRTE5OEU0NTUxRjQiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSIyN0IwOEM2MjI3NTY5MDhEN0ZFRjZGNEE0MjBBNEE3OCIgc3RSZWY6ZG9jdW1lbnRJRD0iMjdCMDhDNjIyNzU2OTA4RDdGRUY2RjRBNDIwQTRBNzgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5DGUOwAAAAGFBMVEX09PSpqalfX1/+/v75+fnLy8sGBgbr6+vcIh+QAAAB+UlEQVR42pRWAbaEIAhUwLj/jVcUCNH6fXdfGTkLDCNuwUJUkLGMC+ktmnQut/Fapv1L8oZ8fjAR9mEm2lftJsIG0NCsXyAIVx8V+9Mwo3ww3HTuQJwIwZT5aTp4XtjmLC8lfarXZZiePvrjNgAFI17adWPi0wGiXIVV0C3wBhmI2gJGIdDqcTRhSwJnIdk9CxeA5yGZz1TZ/YgCJiTqYshGuTJyDNPQvBRbTL54AG86BVOl/qxeHuoeCgCjSLO64GRmwdBSMmC1W2AnjaUi26ol/bkYTVdJFo0s1y19XrlyBOoOXL0cuboRq5ecy45wKpWxV64GIv7kCXLyYXHTEpjFeoyKmHgn+Y0rYhh7P6Wfd21kl4pWk0+5rJuuotptz90aUwTNEDLi9rJrTAQbMKNzJciqMWqjhThGfGiSrIFljQlZAVMDleola2z2UcdUDFRuXiwXb70cuEq5rCQ3lxRxxbWZq5cE8bpLs0M6QpLG7irWVXbPJLPv8+q79j19jQv6KUGPXlaN9Tn0no14PMs2jQ1xzfW+N0Nrc0jW2MPvv2os9rE0f9JY+KsQgW8ac+AHL3+d+48am8TN63YWnDVm6a/0apBZY7JX0imGpSwmr355OcSPp/pM//No0wvDf5wokRW+jToBU1kfh54vvOoi/1U4KOknwACUTiJP23r1KgAAAABJRU5ErkJggg==">
-
+  <div id="edit-panel" [ngStyle]="{'height': divHeight}">
+    <div class="style-toggle" (click)="toggle()">
+      <i class="fa fa-edit"></i>
     </div>
-    <div id="style-selector-container">
-      <div class="style-selector-wrapper">
-        <div class="container">
-          <div class="row">
-            <ng-content>
+    <div id="edit-panel-container">
+      <!-- <div class="edit-panel-wrapper"> -->
+      <!-- <div class="container"> -->
+      <!-- <div class="row"> -->
+      <ng-content>
 
-            </ng-content>
-
-          </div>
-        </div>
-      </div>
+      </ng-content>
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- </div> -->
     </div>
   </div>
 </ng-container>

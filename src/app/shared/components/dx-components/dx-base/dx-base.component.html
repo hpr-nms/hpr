@@ -1,22 +1,19 @@
-<button *ngIf="isRowSelected" type="button" (click)="deleteRow()">حذف</button>
-<button  type="button" (click)="exportToExcel()">خروجی اکسل</button>
+<!-- <button *ngIf="isRowSelected" type="button" (click)="deleteRow()">حذف</button> -->
 <ng-content>
-   </ng-content>
-<div class="row" >
+</ng-content>
+<div>
   <!-- جستجو در جدول و تنظیمات -->
   <div [ngClass]="classOffset"></div>
   <!-- class="float-right" -->
 
-  <dx-data-grid id="dx"  name='name' [dataSource]="dataSource | async"
-    [remoteOperations]="{ filtering:true,groupPaging: true }" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true"
-    [showRowLines]="true" (headerFilterChange)="onHeaderFilrerChng($event)"
-     [rtlEnabled]="true" [hoverStateEnabled]="true" (columnsChange)="columnsChange($event)"
-    [allowColumnResizing]="true" [height]='gridHeight' [selectedRowKeys]="[]" (onRowClick)="rowClick($event)"
-    (onSelectionChanged)="selectionChanged($event)" [wordWrapEnabled]="dxOptions.colunmWordWrap"
-    [ngClass]="dxClass" (selectionFilterChange)="hh($event)"
-    [columnAutoWidth]="true" (filterPanelChange)="hh($event)"
-
-    >
+  <dx-data-grid [id]="gridName" name="gridName" [dataSource]="dataSource | async" [allowColumnReordering]="true"
+    [rowAlternationEnabled]="true" [showBorders]="true" [showRowLines]="true" [rtlEnabled]="true"
+    [showColumnLines]="true" [hoverStateEnabled]="true" [allowColumnResizing]="true" [columnAutoWidth]="false"
+    [ngClass]="dxClass" [filterRow]="filterRow" [cellHintEnabled]="cellHintEnabled" [wordWrapEnabled]="wordWrapEnabled"
+    [remoteOperations]="remoteOperations" [height]='gridHeight' (headerFilterChange)="onHeaderFilrerChng($event)"
+    (columnsChange)="columnsChange($event)" (onRowClick)="rowClick($event)"
+    (onSelectionChanged)="selectionChanged($event)" (filterRowChange)="onFilterRowChange($event)"
+    (filterValueChange)="onFilterValueChange($event)">
     <!-- [filterRow]="filterRow" -->
     <!-- [customizeColumns]="customizeColumns(columns)"  فانکشنی برای کاستومایز کردن ستون ها-->
     <!-- (onContentReady)="onContentReady($event)"  function that is executed when the widget's content is ready and each time the content is changed. -->
@@ -28,18 +25,12 @@
 
     <!-- *************************************  قسمت ستون ها  ********************************************* -->
     <!-- ساخت ستون ها -->
-    <div *ngFor="let column of dxColumns; let ind = index">
-      <!-- <dxi-column allowColumnResizing='true'  groupIndex="string" caption="##" [dataField]='index'> -->
-          <!-- alignment="right" [columnMinWidth]="200"  [width]="250" -->
-        <!-- </dxi-column> -->
-      <dxi-column allowColumnResizing='true'
-      (selectedFilterOperationChange)="hhh($event,column.dataField)"
-      (filterValueChange)="hhh($event,column.dataField)"
-         [sortOrder]="sortOrder" [visible]='column.visible' [dataField]="column.dataField" [caption]="column.caption" alignment="right"
-        [groupIndex]="column.dataType" columnResizingMode="widget" [allowSorting]="dxOptions.sorting.allowSorting">
+    <div *ngFor="let column of dxColumns">
+      <dxi-column allowColumnResizing='true' [visible]='column.visible' [dataField]="column.dataField"
+        [caption]="column.caption" [width]="column.width" [groupIndex]="column.dataType" columnResizingMode="widget"
+        [allowSorting]="dxOptions.sorting.allowSorting">
         <!-- alignment="right" [columnMinWidth]="200"  [width]="250" -->
       </dxi-column>
-
     </div>
 
     <!-- ********************************************************************************************* -->
@@ -48,7 +39,6 @@
     <!-- <app-dx-base></app-dx-base> -->
     <!-- <dx-data-grid [dataSource]="dataSource" showBorders="true"> </dx-data-grid> -->
     <!-- </div> -->
-
     <!-- *************************************  قسمت تنظیمات   ********************************************* -->
 
     <!-- دکمه انتخاب ستون ها  برای نمایش از مدال کوچک  -->
@@ -56,43 +46,55 @@
       emptyPanelText="برای مخفی کردن, ستون ها را به اینجا بکشید" title="ستون های مخفی">
     </dxo-column-chooser>
 
-
     <!-- فیکس کردن ستون بد راست یا چپ (درکانتکس منو) -->
     <dxo-column-fixing [enabled]="true" [texts]="fixtexts">
     </dxo-column-fixing>
 
-    <dxo-sorting [mode]="sortingMode" ascendingText="aaaa"  clearText="clr" descendingText="dd">
-    </dxo-sorting>
 
-    <dxo-header-filter [visible]="true" >
-    </dxo-header-filter>
+    <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true">
+    </dxo-export>
+
     <!-- فیلد فیلتر بالای هر ستون -->
-    <dxo-filter-row [visible]="true" applyFilter='auto' applyFilterText="applyFilterText" (filterRowChange)="hh($event)">
+    <dxo-filter-row [visible]="true" applyFilter='auto' [operationDescriptions]="operationDescriptions"
+      applyFilterText="applyFilterText">
       <!-- [applyFilter]= 'auto | onClick' [applyFilterText]=applyFilterText -->
     </dxo-filter-row>
 
-    <dxo-group-panel [visible]="true" emptyPanelText='پنل خالی است'>
+    <dxo-header-filter [visible]="true">
+    </dxo-header-filter>
+
+
+    <!-- ********************************************************************************************* -->
+
+    <dxo-editing mode="batch" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true" [useIcons]="true"
+      [selectTextOnEditStart]="false" startEditAction="click">
+    </dxo-editing>
+
+    <dxo-sorting mode="dxOptions.sorting.sortingMode">
+    </dxo-sorting>
+
+
+    <dxo-group-panel [visible]="true" emptyPanelText='برای گروه بندی ستون را اینجا رها کنید'>
     </dxo-group-panel>
 
     <dxo-grouping [autoExpandAll]="true">
     </dxo-grouping>
 
-    <dxo-selection mode="single">
+    <dxo-selection *ngIf="!disableSelectRow" mode="single">
       <!-- mode='multiple' | 'none' | 'single' -->
     </dxo-selection>
 
     <!--  اسکرول خوردن صفحه بجای صفحه بندی -->
-    <dxo-scrolling mode="virtual" useNative="false" scrollByContent='false'>
-      <!-- useNative="false" scrollByContent='true' برای استفاده از اسکرول و دکمه وسط موس -->
-    </dxo-scrolling>
+    <!-- <dxo-scrolling mode="virtual" useNative="true" scrollByContent='true'> -->
+    <!-- useNative="false" scrollByContent='true' برای استفاده از اسکرول و دکمه وسط موس -->
+    <!-- </dxo-scrolling> -->
 
-    <dxo-search-panel [visible]="true"  [highlightCaseSensitive]="true" placeholder="جستجو ...">
+    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="جستجو ...">
     </dxo-search-panel>
     <!-- ********************************************************************************************* -->
 
 
   </dx-data-grid>
-
   <div [ngClass]="classOffset"></div>
 </div>
 

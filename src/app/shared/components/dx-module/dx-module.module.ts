@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { DxDataGridModule, DxTreeListModule } from "devextreme-angular";
 import { DxBaseComponent } from "../dx-components/dx-base/dx-base.component";
 import { CommonModule } from '@angular/common';
+import { FormComponentComponent } from '../form-component/form-component.component';
 
 @NgModule({
   imports: [
@@ -12,10 +13,11 @@ import { CommonModule } from '@angular/common';
     DxTreeListModule
   ],
   exports: [
-    DxBaseComponent,
+    DxBaseComponent,FormComponentComponent
+
   ],
   declarations: [
-    DxBaseComponent,
+    DxBaseComponent,FormComponentComponent
   ],
   schemas: [],
   providers: []

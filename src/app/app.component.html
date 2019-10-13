@@ -49,7 +49,7 @@
           </mat-form-field>
 
 
-          <button mat-raised-button type="submit" color="primary">ذخیره</button>
+          <button mat-raised-button type="submit" color="primary"  (click)="submit()">ذخیره</button>
           <button mat-raised-button type="button" (click)="clearForm(customForm)">ریست</button>
 
         </form>
@@ -59,8 +59,8 @@
   </div>
 </div>
 
+<app-form-component  [opensPanel]="opensEditPanel" [closesPanel]="closesEditPanel" [height]="hig" >
 
-<app-dashboard>
     <div class="example-container">
         <form #customForm="ngForm" class="example-container" [formGroup]="options">
 
@@ -103,4 +103,4 @@
   <button mat-raised-button type="submit" color="primary">ذخیره</button>
   <button mat-raised-button type="button" (click)="clearForm(customForm)">ریست</button>
 
-</app-dashboard>
+</app-form-component>

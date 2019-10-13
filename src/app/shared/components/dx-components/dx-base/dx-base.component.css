@@ -33,5 +33,17 @@
   margin: 0;
 }
 ::ng-deep .dx-datagrid{
+  font-size:12px;
   font-family: IRANSans-web !important;
+}
+
+::ng-deep .dx-header-row{
+  background-color:#32c5d2;
+  color:#FFF;
+}
+/* ::ng-deep .dx-datagrid-table-fixed{
+  width:unset !important;
+} */
+::ng-deep .dx-datagrid .dx-header-filter-empty{
+  color:#FFF;
 }

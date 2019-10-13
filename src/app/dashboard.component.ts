@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+// import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,74 +8,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  @Input() isshowdiv = false;
 
-  Tab = "tab_1-1";
-  constructor(
-    public router: Router
-  ) { }
+
+  @Input() height: string;
+  @Input() isshowdiv: boolean;
+  @Input() formState: 0;
+  @Output() onshowEditPanelChange = new EventEmitter<any>();
+  openByToggle = false;
+  divHeight = '0px';
+  constructor() { }
 
   ngOnInit() {
-    // this.Tab = "tab_1-1";
-    // console.log(this.Tab);
+    this.isshowdiv = false;
   }
-
-  HideDiv() {
-    console.log(document.getElementById("style-selector"));
-
-    if (document.getElementById("style-selector").classList.contains("open")) {
-      document.getElementById("style-selector").classList.remove("open");
-      document.getElementById("style-selector").classList.add("close");
-      this.isshowdiv = false;
+  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+    if (changes['isshowdiv']) {
+      // if (changes['isshowdiv'].currentValue) {
+        this.onClick();
+        console.log('equalllll');
+      // } else {
+        console.log('close');
+      // }
+      // this.HideDiv(changes['isshowdiv'].currentValue);
+    }
+  }
+  onClick() {
+    if (this.isshowdiv) {
+      this.divHeight = this.height;
     } else {
-      document.getElementById("style-selector").classList.add("open");
-      document.getElementById("style-selector").classList.remove("close");
-      this.isshowdiv = true;
+      this.divHeight = '0px';
+    }
+    // this.openByToggle=!this.openByToggle;
+
+  }
+  toggle() {
+    console.log(this.divHeight);
+    if (this.divHeight !== '0px') {
+      this.divHeight='0px';
+      this.isshowdiv=false;
+
+    }else{
+      this.divHeight=this.height;
+      this.isshowdiv=true;
+
     }
 
   }
-
-  // openNav() {
-  //   if (!this.openSideBar) {
-  //     // document.getElementById("mySidebar").classList.add("open");
-  //     // document.getElementById("main").classList.add("open");
-  //     document.getElementById("sidebar-toggle").classList.remove("exitUmLeft");
-  //     document.getElementById("sidebar-toggle").classList.add("exitUmLeft");
-
-  //     console.log(document.getElementById("sidebar-toggle").classList, this.openSideBar);
-
-  //   } else {
-  //     // document.getElementById("mySidebar").classList.remove("open");
-  //     // document.getElementById("main").classList.remove("open");
-  //     document.getElementById("sidebar-toggle").classList.remove("exitUmLeft");
-  //     document.getElementById("sidebar-toggle").classList.add("exitUmleft");
-
-  //     console.log(document.getElementById("sidebar-toggle").classList, this.openSideBar);
-
-  //   }
-  //   this.openSideBar = !this.openSideBar;
-  // }
-
-  // changeTab(tabIndex) {
-  //   this.Tab = tabIndex;
-  // }
-
-  // callComponent(component) {
-  //   if (component === "assignActionToOperation") {
-  //     this.Tab = "tab_6-6-1";
-  //   } else if (component === "assignOperationToRole") {
-  //     this.Tab = "tab_6-6-2";
-  //   } else if (component === "assignRoleToUser") {
-  //     this.Tab = "tab_6-6-3";
-  //   }
-  // }
-
-  // toggleMenu(e) {
-  //   this.openNav();
-  //   e.preventDefault();
-  //   document.getElementById("wrapper").classList.toggle("toggled");
-  // }
-
 
 }
 

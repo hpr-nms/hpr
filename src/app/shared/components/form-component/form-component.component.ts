@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-form-component',
@@ -8,22 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponentComponent implements OnInit {
 
+
+
+  @Input() height: string = '50vh';
+  @Input() opensPanel: boolean;
+  @Input() closesPanel: boolean;
+  @Input() formState: 0;  //نیازی نیست در خود فرم بالای فیلد ها قرار میگیرد
+  // @Output() onshowEditPanelChange = new EventEmitter<any>();
+  openByToggle = false;
+  divHeight = '0px';
   constructor() { }
 
   ngOnInit() {
+    // this.isshowdiv = false;
   }
-
-
-  resize() {
-    var ss = document.getElementById('nms');
-    console.log(ss);
-    ss.style.display = 'block';
-    if (ss.style.display === "none") {
-      ss.style.display = 'block';
-      // ss.classList.add();
-
-    } else if(ss.style.display === 'block'){
-      ss.style.display = 'none';
-    }
+  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+    if (changes['opensPanel']) { this.openPanel(); }
+    if (changes['closesPanel']) { this.closePanel(); }
   }
+  togglePanel() {
+    if (this.divHeight === '0px') { this.divHeight = this.height; } else { this.divHeight = '0px'; }
+  }
+  openPanel() { this.divHeight = this.height; }
+  closePanel() { this.divHeight = '0px'; }
 }
